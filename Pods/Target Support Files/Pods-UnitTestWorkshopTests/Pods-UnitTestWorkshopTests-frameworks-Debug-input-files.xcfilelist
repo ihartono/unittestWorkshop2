@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-UnitTestWorkshopTests/Pods-UnitTestWorkshopTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
+${BUILT_PRODUCTS_DIR}/Quick/Quick.framework
+${BUILT_PRODUCTS_DIR}/RxTest/RxTest.framework
