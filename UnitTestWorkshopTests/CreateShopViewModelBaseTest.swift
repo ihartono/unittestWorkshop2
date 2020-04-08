@@ -15,12 +15,13 @@ import XCTest
 
 public class CreateShopViewModelBaseTest: QuickSpec {
     
-    public let inputCitySubject = PublishSubject<City?>()
     public let didLoadSubject = PublishSubject<Void>()
-    public let shopNameSubject = PublishSubject<String>()
     public let domainNameSubject = PublishSubject<String>()
+    public let inputCitySubject = PublishSubject<City?>()
+    public let shopNameSubject = PublishSubject<String>()
     public let postalCodeSubject = PublishSubject<Void>()
     public let switchTNCSubject = PublishSubject<Bool>()
+    public let postalCodeValueSubject = PublishSubject<String?>()
     
     public var shopNameValue: TestObserver<String>!
     public var shopNameError: TestObserver<String?>!
@@ -31,6 +32,12 @@ public class CreateShopViewModelBaseTest: QuickSpec {
     public var postalCodeError: TestObserver<String?>!
     public var postalCode: TestObserver<String>!
     public var submitButtonEnabled: TestObserver<Bool>!
+    public var domainErrorIsHidden: TestObserver<Bool>!
+    public var shopNameErrorIsHidden: TestObserver<Bool>!
+    public var cityErrorIsHidden: TestObserver<Bool>!
+    public var postalErrorIsHidden: TestObserver<Bool>!
+    public var presentPostalCodeView: TestObserver<City>!
+    
     
     public var disposeBag = DisposeBag()
     
@@ -46,6 +53,11 @@ public class CreateShopViewModelBaseTest: QuickSpec {
         self.postalCodeError = TestObserver<String?>()
         self.postalCode = TestObserver<String>()
         self.submitButtonEnabled = TestObserver<Bool>()
+        self.domainErrorIsHidden = TestObserver<Bool>()
+        self.shopNameErrorIsHidden = TestObserver<Bool>()
+        self.cityErrorIsHidden = TestObserver<Bool>()
+        self.postalErrorIsHidden = TestObserver<Bool>()
+        self.presentPostalCodeView = TestObserver<City>()
         
         let input = CreateShopViewModel.Input(
             didLoadTrigger: didLoadSubject.asDriverOnErrorJustComplete(),
@@ -53,7 +65,8 @@ public class CreateShopViewModelBaseTest: QuickSpec {
             inputCityTrigger: inputCitySubject.asDriverOnErrorJustComplete(),
             shopNameTrigger: shopNameSubject.asDriverOnErrorJustComplete(),
             postalCodeTrigger: postalCodeSubject.asDriverOnErrorJustComplete(),
-            switchTNCTrigger: switchTNCSubject.asDriverOnErrorJustComplete()
+            switchTNCTrigger: switchTNCSubject.asDriverOnErrorJustComplete(),
+            postalCodeValueTrigger: postalCodeValueSubject.asDriverOnErrorJustComplete()
         )
         
         let output = viewModel.transform(input: input)
@@ -66,6 +79,11 @@ public class CreateShopViewModelBaseTest: QuickSpec {
         output.cityError.drive(self.cityError.observer).disposed(by: disposeBag)
         output.postalCodeError.drive(self.postalCodeError.observer).disposed(by: disposeBag)
         output.postalCode.drive(self.postalCode.observer).disposed(by: disposeBag)
-        output.submitButtonEnabled.drive(self.submitButton.observer).disposed(by: disposeBag)
+        output.submitButtonEnabled.drive(self.submitButtonEnabled.observer).disposed(by: disposeBag)
+        output.domainErrorIsHidden.drive(self.domainErrorIsHidden.observer).disposed(by: disposeBag)
+        output.shopNameErrorIsHidden.drive(self.shopNameErrorIsHidden.observer).disposed(by: disposeBag)
+        output.cityErrorIsHidden.drive(self.cityErrorIsHidden.observer).disposed(by: disposeBag)
+        output.postalErrorIsHidden.drive(self.postalErrorIsHidden.observer).disposed(by: disposeBag)
+        output.presentPostalCodeView.drive(self.presentPostalCodeView.observer).disposed(by: disposeBag)
     }
 }

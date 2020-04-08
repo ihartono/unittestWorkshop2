@@ -27,7 +27,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     }
                     
                     useCase.checkShopNameAvailability = { _ in
-                        return .just(nil)
+                        return .just(true)
                     }
                     
                     useCase.checkDomainNameAvailability = { _ in
@@ -36,7 +36,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     
                     self.shopNameSubject.onNext("kuda")
                     self.domainNameValue.assertValue("kuda-4")
-                    self.shopNameError.assertValue(nil)
+                    self.shopNameError.assertDidNotEmitValue()
                 }
                 
                 it("invalid shopname, still show a valid domain name"){
@@ -45,12 +45,12 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     }
                     
                     useCase.checkShopNameAvailability = { _ in
-                        return Driver.just("shop not available")
+                        return Driver.just(false)
                     }
                     
                     self.shopNameSubject.onNext("tokopedia")
                     self.domainNameValue.assertValue("tokopedia-4")
-                    self.shopNameError.assertValue("shop not available")
+                    self.shopNameError.assertValue("Shop name not available")
                 }
                 
                 it("shows error when shop name has less than 3 characters") {
@@ -100,7 +100,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     self.domainNameValue.assertLastValue("tokofoo")
                     
                     useCase.checkShopNameAvailability = { _ in
-                        return .just(nil)
+                        return .just(true)
                     }
                     
                     useCase.getDomainName = { name in
@@ -117,7 +117,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     }
                     
                     useCase.checkShopNameAvailability = { _ in
-                        return .just(nil)
+                        return .just(true)
                     }
                     
                     useCase.checkDomainNameAvailability = { _ in
@@ -172,10 +172,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                 it("select city and select postal code") {
                     let city = City(id: "1", name: "Jakarta")
                     self.inputCitySubject.onNext(city)
-                    
-                    useCase.getPostalCode = { _ in
-                        return .just("17114")
-                    }
+                    self.postalCodeValueSubject.onNext("17114")
                     
                     self.postalCodeSubject.onNext(())
                     self.postalCode.assertValue("17114")
@@ -185,28 +182,7 @@ private class CreateShopTest: CreateShopViewModelBaseTest {
                     // Current City
                     let city = City(id: "1", name: "Jakarta")
                     self.inputCitySubject.onNext(city)
-                    
-                    useCase.getPostalCode = { _ in
-                        return .just("12345")
-                    }
-                    
-                    self.postalCodeSubject.onNext(())
-                    self.postalCode.assertValue("12345")
-                    
-                    let newCity = City(id: "2", name: "Bandung")
-                    self.inputCitySubject.onNext(newCity)
-                    
-                    self.postalCode.assertLastValue("Postal Code")
-                }
-                
-                it("should reset postal code after select a new city"){
-                    // Current City
-                    let city = City(id: "1", name: "Jakarta")
-                    self.inputCitySubject.onNext(city)
-                    
-                    useCase.getPostalCode = { _ in
-                        return .just("12345")
-                    }
+                    self.postalCodeValueSubject.onNext("12345")
                     
                     self.postalCodeSubject.onNext(())
                     self.postalCode.assertValue("12345")

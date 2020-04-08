@@ -121,7 +121,6 @@ internal class CreateShopViewController: UIViewController {
         output.cityError
             .drive(onNext:{ [weak self] value in
                 self?.cityError.text = value
-                self?.cityError.isHidden = value?.isEmpty ?? true
             })
             .disposed(by: rx_disposeBag)
         
@@ -132,7 +131,6 @@ internal class CreateShopViewController: UIViewController {
         output.postalCodeError
             .drive(onNext:{ [weak self] value in
                 self?.postalCodeError.text = value
-                self?.postalCodeError.isHidden = value?.isEmpty ?? true
             })
             .disposed(by: rx_disposeBag)
         
@@ -149,6 +147,19 @@ internal class CreateShopViewController: UIViewController {
                 return vc.postalCodeSelected
             }
             .drive(selectedPostalCodeSubject)
+            .disposed(by: rx_disposeBag)
+        
+        
+        output.postalErrorIsHidden
+            .drive(onNext: { [weak self] isHidden in
+                self?.postalCodeError.isHidden = isHidden
+            })
+            .disposed(by: rx_disposeBag)
+        
+        output.cityErrorIsHidden
+            .drive(onNext: { [weak self] isHidden in
+                self?.cityError.isHidden = isHidden
+            })
             .disposed(by: rx_disposeBag)
     }
     

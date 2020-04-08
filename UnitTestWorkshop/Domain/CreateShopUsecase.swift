@@ -14,7 +14,6 @@ internal class CreateShopUsecase {
     var getDomainName = _getDomainName
     var checkShopNameAvailability = _checkShopNameAvailability
     var checkDomainNameAvailability = _checkDomainNameAvailability
-    var getPostalCode = _getPostalCode
 }
 
 internal func _getDomainName(_ name: String) -> Driver<String> {
@@ -28,12 +27,4 @@ internal func _checkShopNameAvailability(_ name: String) -> Driver<Bool> {
 
 internal func _checkDomainNameAvailability(_ name: String) -> Driver<String?> {
     .just(nil)
-}
-
-internal func _getPostalCode(_ city: City) -> Driver<String?> {
-    let vc = PostalCodeViewController(city: city)
-    let nav = UINavigationController(rootViewController: vc)
-    UIApplication.topViewController()?.present(nav, animated: true, completion: nil)
-    
-    return vc.postalCodeSelected
 }
