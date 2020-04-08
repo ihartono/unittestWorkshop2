@@ -31,6 +31,7 @@
 		23E3182622E2094E00A898EC /* CreateShopViewModelBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E3182522E2094E00A898EC /* CreateShopViewModelBaseTest.swift */; };
 		69AD42C58AB3FDA49898E737 /* Pods_UnitTestWorkshop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FA1BE32F8FB10F153C66149 /* Pods_UnitTestWorkshop.framework */; };
 		B92195D66D36D7E666606127 /* Pods_UnitTestWorkshopTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D30BC5092FD4A73603757547 /* Pods_UnitTestWorkshopTests.framework */; };
+		E53A4757243D79E800416655 /* PlaygroundTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53A4756243D79E800416655 /* PlaygroundTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		7FA1BE32F8FB10F153C66149 /* Pods_UnitTestWorkshop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTestWorkshop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30BC5092FD4A73603757547 /* Pods_UnitTestWorkshopTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTestWorkshopTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D81F2E4D93E1EAEB2ED649FA /* Pods-UnitTestWorkshop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTestWorkshop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTestWorkshop/Pods-UnitTestWorkshop.debug.xcconfig"; sourceTree = "<group>"; };
+		E53A4756243D79E800416655 /* PlaygroundTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaygroundTest.swift; sourceTree = "<group>"; };
+		E53A4759243D7F1D00416655 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +136,7 @@
 				E5AC4A9C2439C83B0016E20E /* SelectCity */,
 				E5AC4A9D2439C84B0016E20E /* PostalCode */,
 				23E317EF22E2024700A898EC /* Utilities */,
+				E53A4759243D7F1D00416655 /* MyPlayground.playground */,
 			);
 			path = UnitTestWorkshop;
 			sourceTree = "<group>";
@@ -143,6 +147,7 @@
 				23E3182522E2094E00A898EC /* CreateShopViewModelBaseTest.swift */,
 				23E317E622E2010000A898EC /* Info.plist */,
 				23E3182322E2091300A898EC /* CreateShopTest.swift */,
+				E53A4756243D79E800416655 /* PlaygroundTest.swift */,
 			);
 			path = UnitTestWorkshopTests;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53A4757243D79E800416655 /* PlaygroundTest.swift in Sources */,
 				23E3182222E208EC00A898EC /* TestObserver.swift in Sources */,
 				23E3182422E2091300A898EC /* CreateShopTest.swift in Sources */,
 				23E3182622E2094E00A898EC /* CreateShopViewModelBaseTest.swift in Sources */,
