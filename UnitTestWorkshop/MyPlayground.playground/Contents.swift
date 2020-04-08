@@ -35,6 +35,7 @@ class CreateShopViewModelBaseTest: QuickSpec {
     func setupBinding(viewModel: CreateShopViewModel) {
         disposeBag = DisposeBag()
         
+        // Set shopNameValue with new observer
         self.shopNameValue = TestObserver<String>()
         
         let input = CreateShopViewModel.Input(
@@ -43,13 +44,14 @@ class CreateShopViewModelBaseTest: QuickSpec {
         
         let output = viewModel.transform(input: input)
         
+        // shopNameValue will become subscriber of viewModel output
         output.shopNameValue
             .drive(self.shopNameValue.observer)
             .disposed(by: disposeBag)
     }
 }
 
-class CreateShopTest: CreateShopViewModelBaseTest {
+class CreateShopViewModelTest: CreateShopViewModelBaseTest {
     override func spec() {
         let useCase = CreateShopUsecase()
         
@@ -57,15 +59,21 @@ class CreateShopTest: CreateShopViewModelBaseTest {
             self.setupBinding(viewModel: CreateShopViewModel(useCase: useCase))
         }
         
+        // Describe: Exactly describes what component you are testing
         describe("Create Shop") {
+            
+            // Context: Describes the purpose of the test or the current state of an object
             context("User input shop name") {
-                it("Should display shop name") {
+                beforeEach {
                     useCase.checkShopNameAvailability = { _ in
                         return .just(true)
                     }
                     
                     self.shopNameSubject.onNext("supergadgettt")
-                    
+                }
+                
+                // It: Describes the expected result of the test.
+                it("Should display shop name") {
                     self.shopNameValue.assertValue("supergadgettt")
                 }
             }
@@ -133,4 +141,26 @@ class UploadpediaUseCase {
 useCase._uploadFile = { _, _, _, _ -> Observable<UploadHostResponse> in
     .just(UploadHostResponse.success)
 }
+
+//: File Naming
+//: =
+
+ChatDetailViewModel.swift -> ChatDetailViewModelTest.swift
+
+
+//: How to run unit test
+//: =
+
+cmd + U
+
+
+
+
+
+Reference:
+/**
+ https://qiita.com/phanithken/items/651ae5cf38f46da96926
+ https://www.swiftbysundell.com/basics/unit-testing/
+ https://www.avanderlee.com/swift/unit-tests-best-practices/
+ */
 
